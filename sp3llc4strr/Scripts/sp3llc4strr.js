@@ -5,7 +5,7 @@ var dc = 13;
 var diceType = 0;
 
 $(document).ready(function () {
-	enableButton("#caster-" + caster + " .cast");
+	enableButton(caster, "cast");
 
 	$(".cast").click(function (event) {
 		castRandomSpell();
@@ -28,13 +28,23 @@ $(document).ready(function () {
 	});
 });
 
-function disableButton(selector) {
+function disableButton(num, btn) {
+	var selector = "#caster-" + num + " ." + btn;
+	if (btn == "ALL") {
+		selector = "#caster-" + num + " a";
+	}
+
 	$(selector).addClass("disabled");
 	$(selector).removeClass("btn-primary");
 	$(selector).addClass("btn-default");
 }
 
-function enableButton(selector) {
+function enableButton(num, btn) {
+	var selector = "#caster-" + num + " ." + btn;
+	if (selector == "ALL") {
+		selector = "#caster-" + num + " a";
+	}
+
 	$(selector).removeClass("disabled");
 	$(selector).addClass("btn-primary");
 	$(selector).removeClass("btn-default");
@@ -46,7 +56,7 @@ function castRandomSpell() {
 		type: "POST",
 		cache: false
 	}).done(function (json) {
-		disableButton("#caster-" + caster + " .cast");
+		disableButton(caster, "cast");
 
 		$(".spell-name").html(json.name);
 		$(".spell-level").html(json.level == 0 ? "Cantrip" : "Level " + json.level);
@@ -54,10 +64,10 @@ function castRandomSpell() {
 
 		if (json.rollToHit == true) {
 			$(".spell-desc").append("<hr />Roll To Hit...");
-			enableButton("#caster-" + caster + " .hit");
+			enableButton(caster, "hit");
 		}
 		else if (json.save != null) {
-			enableButton("#caster-" + target + " .save");
+			enableButton(target, "save");
 		}
 
 		diceType = json.diceType;
@@ -70,12 +80,12 @@ function rollToHit() {
 		type: "POST",
 		cache: false
 	}).done(function (json) {
-		disableButton("#caster-" + caster + " .hit");
+		disableButton(caster, "hit");
 
 		$(".spell-desc").append("<br />" + json.roll + "<hr />");
 		if (json.roll >= ac) {
 			$(".spell-desc").append("<p>You hit!</p>Roll Damage...");
-			enableButton("#caster-" + caster + " .damage");
+			enableButton(caster, "damage");
 		}
 		else {
 			$(".spell-desc").append("<p>You missed.</p>");
@@ -93,7 +103,7 @@ function rollDamage() {
 		},
 		cache: false
 	}).done(function (json) {
-		disableButton("#caster-" + target + " .save");
+		disableButton(target, "save");
 
 		$(".spell-desc").append("<hr />Spell dealt <b>" + json.damage + "</b> damage!");
 
@@ -117,7 +127,7 @@ function savingThrow() {
 		type: "POST",
 		cache: false
 	}).done(function (json) {
-		disableButton("#caster-" + target + " .save");
+		disableButton(target, "save");
 
 		$(".spell-desc").append("<br />" + json.roll + "<hr />");
 
@@ -127,13 +137,13 @@ function savingThrow() {
 		}
 		else {
 			$(".spell-desc").append("<p>Saving throw failed... Take damage.</p>");
-			enableButton("#caster-" + caster + " .damage");
+			enableButton(caster, "damage");
 		}
 	});
 }
 
 function switchTurn() {
-	disableButton("#caster-" + caster + " a");
+	disableButton(caster, "ALL");
 
 	var temp = caster;
 	caster = target;
@@ -142,5 +152,5 @@ function switchTurn() {
 	$("#arrow-" + target).removeClass("on");
 	$("#arrow-" + caster).addClass("on");
 
-	enableButton("#caster-" + caster + " .cast");
+	enableButton(caster, "cast");
 }
