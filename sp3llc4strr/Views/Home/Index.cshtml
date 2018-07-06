@@ -1,31 +1,25 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+	string hp = "20";
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1 class="spell-name">Name</h1>
+	<p class="spell-level">Level</p>
+    <p class="lead spell-desc">Description text will be placed here.</p>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <div class="col-md-5 caster" id="caster-1">
+        <h1>One  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="curr-hp">@hp</span><span class="total-hp">/@hp</span> <i class="glyphicon glyphicon-heart"></i></h1>
+		@Html.Partial("ActionButtons")
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+
+    <div class="col-sm-2" id="turn-arrows">
+        <h1><span class="left-arrow on" id="arrow-1">&laquo;</span> &nbsp; <span class="right-arrow" id="arrow-2">&raquo;</span></h1>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+
+    <div class="col-md-5 caster" id="caster-2">
+		<h1>Two  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="curr-hp">@hp</span><span class="total-hp">/@hp</span> <i class="glyphicon glyphicon-heart"></i></h1>
+		@Html.Partial("ActionButtons")
     </div>
 </div>

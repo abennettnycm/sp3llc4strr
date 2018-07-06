@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static sp3llc4strr.Models.SpellModels;
 
 namespace sp3llc4strr.Controllers
 {
@@ -13,18 +15,32 @@ namespace sp3llc4strr.Controllers
 			return View();
 		}
 
-		public ActionResult About()
+		[HttpPost]
+		public JsonResult GetRandomSpell()
 		{
-			ViewBag.Message = "Your application description page.";
+			SpellBook spellbook = new SpellBook();
+			Random rand = new Random();
+			int rn = rand.Next(0, spellbook.spells.Count);
 
-			return View();
+			return Json(spellbook.spells[rn]);
 		}
 
-		public ActionResult Contact()
+		[HttpPost]
+		public JsonResult RollD20()
 		{
-			ViewBag.Message = "Your contact page.";
+			Random rand = new Random();
+			int d20 = rand.Next(1, 21); // inclusive, exclusive
 
-			return View();
+			return Json(new { roll = d20 });
+		}
+
+		[HttpPost]
+		public JsonResult RollDamage(string dice)
+		{
+			Random rand = new Random();
+			int dmg = rand.Next(1, int.Parse(dice) + 1); // add 1 since upper bound is exclusive
+
+			return Json(new { damage = dmg });
 		}
 	}
 }

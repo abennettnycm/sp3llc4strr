@@ -16,9 +16,43 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+/* ----- CUSTOM ----- */
+.jumbotron hr {
+	border-color:#BBB;
 }
+
+.spell-level {
+	font-size:14px;
+	color:#777;
+}
+
+.caster {
+	text-align:center;
+}
+
+	.caster h1 {
+		width:100%;
+	}
+
+	.caster .total-hp {
+		font-size:16px;
+		color:#999;
+	}
+
+	.caster i {
+		font-size:20px;
+		color:firebrick;
+	}
+
+	.caster a {
+		width:200px;
+	}
+
+#turn-arrows {
+	color:#CCC;
+	text-align:center;
+}
+
+	#turn-arrows .on {
+		color:#428bca;
+	}
