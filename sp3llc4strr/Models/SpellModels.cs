@@ -16,6 +16,7 @@ namespace sp3llc4strr.Models
 			public SavingThrow save { get; set; }
 			public int howManyDice { get; set; }
 			public int diceType { get; set; }
+			public int diceTypeAlternate { get; set; }
 		}
 
 		public class SavingThrow
@@ -45,7 +46,8 @@ namespace sp3llc4strr.Models
 						halfOnFail = false
 					},
 					howManyDice = 1,
-					diceType = 6
+					diceType = 6,
+					diceTypeAlternate = -1
 				});
 
 				spells.Add(new Spell
@@ -56,7 +58,8 @@ namespace sp3llc4strr.Models
 					rollToHit = true,
 					save = null,
 					howManyDice = 1,
-					diceType = 10
+					diceType = 10,
+					diceTypeAlternate = -1
 				});
 
 				spells.Add(new Spell
@@ -67,7 +70,42 @@ namespace sp3llc4strr.Models
 					rollToHit = true,
 					save = null,
 					howManyDice = 1,
-					diceType = 8
+					diceType = 8,
+					diceTypeAlternate = -1
+				});
+
+				spells.Add(new Spell
+				{
+					level = 0,
+					name = "Infestation",
+					description = "You cause a cloud of mites, fleas, and other parasites to appear momentarily on one creature you can see within range. The target must succeed on a Constitution saving throw, or it takes 1d6 poison damage.",
+					rollToHit = true,
+					save = new SavingThrow()
+					{
+						type = "CON",
+						number = STANDARD_SAVE_NUM,
+						halfOnFail = false
+					},
+					howManyDice = 1,
+					diceType = 6,
+					diceTypeAlternate = -1
+				});
+
+				spells.Add(new Spell
+				{
+					level = 0,
+					name = "Toll the Dead",
+					description = "You point at one creature you can see within range, and the sound of a dolorous bell fills the air around it for a moment. The target must succeed on a Wisdom saving throw or take 1d8 necrotic damage. If the target is missing any of its hit points, it instead takes 1d12 necrotic damage.",
+					rollToHit = true,
+					save = new SavingThrow()
+					{
+						type = "CON",
+						number = STANDARD_SAVE_NUM,
+						halfOnFail = false
+					},
+					howManyDice = 1,
+					diceType = 8,
+					diceTypeAlternate = 12
 				});
 			}
 		}
